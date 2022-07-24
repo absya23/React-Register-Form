@@ -33,7 +33,10 @@ const schema = yup
       .string()
       .required("Please select your job")
       .oneOf(["teacher", "developer", "doctor"]),
-    term: yup.boolean().required("Please accept the terms and conditions"),
+    term: yup
+      .boolean()
+      .required("Please accept the terms and conditions")
+      .oneOf([true], "The terms and conditions must be accepted."),
   })
   .required();
 
@@ -68,7 +71,7 @@ const RegisterHook = () => {
     mode: "onChange",
     defaultValue: { gender: "male" },
   });
-  console.log(errors);
+  // console.log(errors);
   // console.log(isSubmitting);
   const onSubmitHandler = (values) => {
     if (!isValid) return;
@@ -89,6 +92,8 @@ const RegisterHook = () => {
   };
 
   const watchGender = watch("gender");
+  // const watchTerm = watch("term");
+  // console.log(watchTerm);
   // console.log(watchGender);
 
   return (
